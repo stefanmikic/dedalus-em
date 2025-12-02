@@ -1,0 +1,20 @@
+<mat-card class="department-card" (click)="onCardClick()">
+  <div class="department-card-header">
+    <span class="department-name">{{ department().name }}</span>
+    <span class="employee-count">{{ department().employeeCount }}</span>
+  </div>
+
+  <p class="department-subtitle">
+    {{ department().employeeCount === 1 ? 'Employee' : 'Employees' }}
+  </p>
+
+  <button
+    mat-stroked-button
+    color="warn"
+    class="delete-button"
+    (click)="onDeleteClick($event)"
+    [disabled]="department().id === null"
+  >
+    Delete
+  </button>
+</mat-card>

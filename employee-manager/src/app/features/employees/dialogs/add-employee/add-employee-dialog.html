@@ -1,0 +1,50 @@
+<h2 mat-dialog-title class="title">Add Employee</h2>
+
+<form [formGroup]="form" mat-dialog-content class="form">
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Full Name</mat-label>
+    <input matInput formControlName="fullName" />
+
+    @if (form.controls.fullName.invalid && form.controls.fullName.touched) {
+      <mat-error>Full name is required</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Email</mat-label>
+    <input matInput type="email" formControlName="email" />
+
+    @if (form.controls.email.invalid && form.controls.email.touched) {
+      <mat-error>Invalid email format</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Phone Number</mat-label>
+    <input matInput formControlName="phoneNumber" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Address</mat-label>
+    <input matInput formControlName="address" />
+  </mat-form-field>
+
+  @if (errorMessage()) {
+    <div class="error">{{ errorMessage() }}</div>
+  }
+
+</form>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="close()">Cancel</button>
+
+  <button
+    mat-flat-button
+    color="primary"
+    [disabled]="form.invalid || isSubmitting()"
+    (click)="save()"
+  >
+    @if (isSubmitting()) { Saving... } @else { Add }
+  </button>
+</div>

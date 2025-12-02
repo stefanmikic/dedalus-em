@@ -1,0 +1,49 @@
+<mat-toolbar color="primary" class="toolbar">
+  <span class="toolbar-title">Employee Manager</span>
+
+  <span class="toolbar-spacer"></span>
+
+  <em-employee-search [(model)]="searchTerm" (search)="onSearchTermChange($event)" />
+</mat-toolbar>
+
+<div class="dashboard-container">
+  @if (errorMessage()) {
+  <div class="error-message">{{ errorMessage() }}</div>
+  } @if (isLoading()) {
+  <div class="loading">Loading...</div>
+  } @if (!isInSearchMode()) {
+
+  <div class="header-row">
+    <h2>Departments</h2>
+    <button mat-flat-button color="primary" (click)="onAddDepartment()">
+      <mat-icon>add</mat-icon>
+      <span>Add Department</span>
+    </button>
+  </div>
+
+  <div class="department-grid">
+    @for (dept of departments(); track dept.id) {
+    <em-department-card
+      [department]="dept"
+      (open)="openDepartment($event)"
+      (delete)="onDeleteDepartment($event)"
+    />
+    } @if (departments().length === 0 && !isLoading()) {
+    <div class="empty-state">No departments yet.</div>
+    }
+  </div>
+
+  } @else {
+
+  <mat-card class="results-card">
+    <mat-card-title>Search results</mat-card-title>
+
+    <em-employee-table
+      [employees]="searchResults()"
+      [showDepartment]="true"
+      (rowClick)="onEmployeeRowClick($event)"
+    />
+  </mat-card>
+
+  }
+</div>

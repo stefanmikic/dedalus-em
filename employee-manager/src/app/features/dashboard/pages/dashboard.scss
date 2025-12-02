@@ -1,0 +1,107 @@
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.toolbar-title {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.search-field {
+  width: 260px;
+}
+
+.dashboard-container {
+  max-width: 1200px;
+  margin: 24px auto;
+  padding: 0 16px 32px;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+
+  h2 {
+    margin: 0;
+  }
+}
+
+.department-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.employee-count {
+  min-width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.department-subtitle {
+  margin: 8px 0 16px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.delete-button {
+  align-self: flex-start;
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.6);
+  padding: 24px 0;
+}
+
+.results-card {
+  padding: 16px;
+}
+
+.full-width-table {
+  width: 100%;
+  margin-top: 12px;
+}
+
+.clickable-row {
+  cursor: pointer;
+}
+
+.clickable-cell {
+  cursor: pointer;
+  color: #1976d2;
+}
+
+.clickable-cell:hover {
+  text-decoration: underline;
+}
+
+.no-results td {
+  padding: 16px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.loading {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.error-message {
+  margin-bottom: 12px;
+  color: #c62828;
+}

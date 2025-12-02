@@ -1,0 +1,50 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="router.navigate(['/'])">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+
+  <span class="toolbar-title">
+    {{ department()?.name || 'Department' }}
+  </span>
+
+  <span class="spacer"></span>
+
+  <em-employee-search [(model)]="searchTerm" />
+</mat-toolbar>
+
+<div class="container">
+  @if (isLoading()) {
+  <div class="loading">Loading...</div>
+  } @if (errorMessage()) {
+  <div class="error">{{ errorMessage() }}</div>
+  }
+
+  <h2>{{ department()?.name }}</h2>
+
+  <button mat-flat-button color="primary" (click)="onAddEmployee()">
+    <mat-icon>add</mat-icon> Add Employee
+  </button>
+
+  @if (!isInSearchMode()) {
+
+  <em-employee-table
+    [employees]="employees()"
+    [showActions]="true"
+    (rowClick)="onEmployeeRowClick($event)"
+    (delete)="onDeleteEmployee($event)"
+  />
+
+  } @else {
+
+  <mat-card class="results-card">
+    <mat-card-title>Search results</mat-card-title>
+
+    <em-employee-table
+      [employees]="searchResults()"
+      [showDepartment]="true"
+      (rowClick)="onEmployeeRowClick($event)"
+    />
+  </mat-card>
+
+  }
+</div>

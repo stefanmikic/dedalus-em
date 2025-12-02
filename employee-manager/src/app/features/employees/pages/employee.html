@@ -1,0 +1,60 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="router.navigate(['/'])">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+
+  <span class="toolbar-title">
+    {{ employee()?.fullName || 'Employee' }}
+  </span>
+</mat-toolbar>
+
+<div class="container">
+
+  @if (isLoading()) {
+    <div class="loading">Loading...</div>
+  }
+
+  @if (errorMessage()) {
+    <div class="error">{{ errorMessage() }}</div>
+  }
+
+  @if (employee()) {
+
+    <mat-card class="employee-card">
+
+      <mat-card-title>{{ employee()!.fullName }}</mat-card-title>
+
+      <mat-card-content>
+        <p><strong>Email:</strong> {{ employee()!.email }}</p>
+        <p><strong>Phone:</strong> {{ employee()!.phoneNumber }}</p>
+        <p><strong>Address:</strong> {{ employee()!.address }}</p>
+
+        <p>
+          <strong>Department:</strong><br />
+
+          @if (employee()!.departmentId) {
+            {{ employee()!.departmentName }}
+          } @else {
+            Unassigned
+          }
+        </p>
+      </mat-card-content>
+
+      <mat-card-actions align="end">
+
+        @if (employee()!.departmentId) {
+          <button mat-flat-button color="primary" (click)="goToDepartment()">
+            Go to Department
+          </button>
+        }
+
+        <button mat-flat-button color="warn" (click)="deleteEmployee()">
+          Delete Employee
+        </button>
+
+      </mat-card-actions>
+
+    </mat-card>
+
+  }
+</div>
